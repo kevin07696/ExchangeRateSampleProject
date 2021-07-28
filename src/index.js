@@ -52,7 +52,7 @@ function App() {
   };
   return (
     <div>
-      <h2>Search Currency to See its Exchange Rates</h2>
+      <h2>Search Crypto to See its Exchange Rates</h2>
       <input
         type="text"
         placeholder="Search defaults to USD"
