@@ -35,12 +35,12 @@ const SELECT_CURRENCY = gql`
 function ExchangeRates({ currency }) {
   const { loading, error, data } = useQuery(SELECT_CURRENCY, {
     variables: { currency },
-    pollInterval: 500,
+    pollInterval: 10000,
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error : {error}</p>;
-  if (data.rates == null) {
+  if (data.rates.length === 0) {
     return <p>No currency match search</p>;
   }
   return data.rates.map(({ currency, rate }) => (
@@ -61,14 +61,15 @@ function App() {
 
   if (error) return <p>Error : {error}</p>;
 
-  if (data == null) {
+
+
+  if (data.rates.length === 0) {
     return <p>No Data</p>;
   }
   const options = [];
   data.rates.forEach((rate) => {
     options.push({ value: rate.currency, label: rate.currency });
   });
-  console.log(options);
 
   return (
     <div>
